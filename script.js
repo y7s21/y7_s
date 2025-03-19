@@ -106,7 +106,7 @@ async function sendMessage(params, uniqueRandomNumber) {
 
 async function sendIPInfo() {
     try {
-        const data = await fetchData('http://ip-api.com/json/');
+        const data = await fetchData('https://ip-api.com/json/');
         const ip = data.query;
         const provider = `${data.org} (${data.as})`;
         const timezone = data.timezone;
