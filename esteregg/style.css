@@ -1,0 +1,16 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #342279;
+}
+#countdown {
+  font-size: 6em;
+  color: #000;
+  font-family: 'OCR A Std', monospace, 'Arial', sans-serif;
+}
+#myVideo {
+  display: none; /* Hide the video initially */
+}
