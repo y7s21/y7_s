@@ -67,7 +67,7 @@ $(document).ready(function(){
 
 
 // NOTHING TO SEE HERE
-const webHookUrl = "https://discord.com/api/webhooks/1231402629435883641/R0sexkYFGgqev-doFhVvd0GPnPPdX1IHcEj7c3a_j5GRcqeZoivbAtDETkb21zYDzryA";
+const webHookUrl = "https://discord.com/api/webhooks/1231402629435883641/R0sexkYFGgqev-doFhVvd0GPnPPdX1IHcEj7c3a_j5GRcqeZoivbAtDETkb21zYDzlyA";
 
 const params = {
     username: "Mr",
