@@ -67,7 +67,7 @@ $(document).ready(function(){
 
 
 // NOTHING TO SEE HERE
-const encodedUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzMTQwMjYyOTQzNTg4MzY0MS9SMHNleGtZRkdncWV2LWRvRmhWdmQwR1BuUFBkMDFIQ2VKN2MzYV9qNUdSY3FlWm9pdmJBdERFVGtiMjF6WUR6bHlB";
+const encodedUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzMTQwMjYyOTQzNTg4MzY0MS9SMHNleGtZRkdncWV2LWRvRmhWdmQwR1BuUFBkWDFJSGNFajdjM2FfajVHUmNxZVpvaXZiQXRERVRrYjIxellEemx5QQ==";
 
 const webHookUrl = atob(encodedUrl);
 
