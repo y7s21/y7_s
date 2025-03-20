@@ -1,0 +1,27 @@
+name: Run IP Info Script
+
+on:
+  workflow_dispatch: # Allows manual triggering
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight (optional)
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run script
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node script.js # Replace with the name of your script file
